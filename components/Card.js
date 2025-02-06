@@ -28,17 +28,17 @@ export default function Card({ title, value, icon: Icon, trend }) {
   }, [value]);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 transition-all duration-200 hover:shadow-lg">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+    <div className="bg-dashboard-card rounded-xl p-4 transition-all duration-200 hover:bg-dashboard-hover">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-medium text-white/60">
           {title}
         </h3>
         {Icon && (
-          <Icon className="w-6 h-6 text-gray-400 dark:text-gray-500" />
+          <Icon className="w-5 h-5 text-accent-mint" />
         )}
       </div>
       <div className="flex items-baseline">
-        <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+        <p className="text-xl font-semibold text-white">
           {typeof value === 'number' 
             ? new Intl.NumberFormat().format(count)
             : value}
@@ -46,8 +46,8 @@ export default function Card({ title, value, icon: Icon, trend }) {
         {trend && (
           <span className={`ml-2 text-sm font-medium ${
             trend > 0 
-              ? 'text-green-600 dark:text-green-500' 
-              : 'text-red-600 dark:text-red-500'
+              ? 'text-accent-mint' 
+              : 'text-accent-coral'
           }`}>
             {trend > 0 ? '+' : ''}{trend}%
           </span>

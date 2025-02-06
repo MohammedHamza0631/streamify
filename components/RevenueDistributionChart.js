@@ -8,14 +8,15 @@ import {
   Legend,
   Tooltip
 } from 'recharts';
-import { revenueDistribution } from '../../lib/mockData';
+import { revenueDistribution } from '@/lib/mockData';
 
-const COLORS = ['#3B82F6', '#10B981'];
+
+const COLORS = ['#98E5DD', '#EEB58F'];
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-gray-900 p-3 rounded-lg shadow">
+      <div className="bg-dashboard-hover p-3 rounded-xl">
         <p className="text-white text-sm font-medium">{`${payload[0].name}: $${payload[0].value.toLocaleString()}`}</p>
       </div>
     );
@@ -30,33 +31,39 @@ export default function RevenueDistributionChart() {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-6">
-        Revenue Distribution
-      </h3>
-      <div className="h-80">
+    <div className="bg-dashboard-card rounded-xl p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-lg font-medium text-white">
+          Revenue Distribution
+        </h3>
+        <span className="text-xs text-white/60">Last 30 Days</span>
+      </div>
+      <div className="h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={60}
-              outerRadius={100}
-              fill="#8884d8"
+              innerRadius={50}
+              outerRadius={80}
               paddingAngle={5}
               dataKey="value"
               label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={COLORS[index % COLORS.length]}
+                  stroke="transparent"
+                />
               ))}
             </Pie>
             <Tooltip content={<CustomTooltip />} />
             <Legend 
               verticalAlign="bottom" 
               height={36}
-              formatter={(value) => <span className="text-gray-700 dark:text-gray-300">{value}</span>}
+              formatter={(value) => <span className="text-white/60">{value}</span>}
             />
           </PieChart>
         </ResponsiveContainer>

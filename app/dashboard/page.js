@@ -1,78 +1,94 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Card from './components/Card';
-import UserGrowthChart from './components/UserGrowthChart';
-import RevenueDistributionChart from './components/RevenueDistributionChart';
-import TopSongsChart from './components/TopSongsChart';
-import DataTable from './components/DataTable';
-import { metrics } from '../lib/mockData';
-import { 
-  UsersIcon, 
-  UserGroupIcon, 
-  PlayIcon,
+import { motion } from 'framer-motion';
+import Card from '@/components/Card';
+import UserGrowthChart from '@/components/UserGrowthChart';
+import RevenueDistributionChart from '@/components/RevenueDistributionChart';
+import TopSongsChart from '@/components/TopSongsChart';
+import DataTable from '@/components/DataTable';
+import UserEngagement from '@/components/UserEngagement';
+import GenreDistribution from '@/components/GenreDistribution';
+
+import PlatformUsage from '@/components/PlatformUsage';
+import { metrics } from '@/lib/mockData';
+import {
+  UsersIcon,
+  UserGroupIcon,
+  MusicalNoteIcon,
   CurrencyDollarIcon,
-  MusicalNoteIcon 
+  TrophyIcon
 } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Streamify Dashboard
-          </h1>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Music Streaming Analytics Overview
-          </p>
+    <div className="min-h-screen bg-primary p-4 sm:p-6 lg:p-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-7xl mx-auto space-y-6"
+      >
+        {/* Header */}
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold text-white">Analytics Dashboard</h1>
+          <p className="text-white/60">Track your music streaming platform's performance and user engagement.</p>
         </div>
-        
-        {/* Key Metrics Section */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8">
+
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <Card
             title="Total Users"
-            value={metrics.totalUsers}
+            value={metrics.totalUsers.toLocaleString()}
+            trend={8.5}
             icon={UsersIcon}
-            trend={5}
           />
           <Card
             title="Active Users"
-            value={metrics.activeUsers}
+            value={metrics.activeUsers.toLocaleString()}
+            trend={12.3}
             icon={UserGroupIcon}
-            trend={2}
           />
           <Card
             title="Total Streams"
-            value={metrics.totalStreams}
-            icon={PlayIcon}
-            trend={8}
+            value={metrics.totalStreams.toLocaleString()}
+            trend={15.7}
+            icon={MusicalNoteIcon}
           />
           <Card
             title="Revenue"
             value={`$${metrics.revenue.toLocaleString()}`}
+            trend={10.2}
             icon={CurrencyDollarIcon}
-            trend={3}
           />
           <Card
             title="Top Artist"
             value={metrics.topArtist}
-            icon={MusicalNoteIcon}
+            icon={TrophyIcon}
+            isText
           />
         </div>
 
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        {/* Charts Row 1 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <UserGrowthChart />
-          <div className="grid grid-cols-1 gap-8">
-            <RevenueDistributionChart />
-            <TopSongsChart />
-          </div>
+          <RevenueDistributionChart />
         </div>
 
-        {/* Data Table Section */}
+        {/* User Engagement and Genre Distribution */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <UserEngagement />
+          <GenreDistribution />
+        </div>
+
+        {/* Platform Usage and Top Songs */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <PlatformUsage />
+          <TopSongsChart />
+        </div>
+
+        {/* Data Table */}
         <DataTable />
-      </div>
-    </main>
+      </motion.div>
+    </div>
   );
 } 
