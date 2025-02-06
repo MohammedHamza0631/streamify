@@ -2,6 +2,9 @@
 
 A modern, responsive analytics dashboard built with Next.js and Tailwind CSS for visualizing music streaming platform metrics. Features beautiful animations, dark theme design, and comprehensive analytics.
 
+### View the Live Project [here](https://streamify-zeta-drab.vercel.app/dashboard)
+
+
 ## 🚀 Features
 
 ### Analytics & Metrics
@@ -43,10 +46,6 @@ A modern, responsive analytics dashboard built with Next.js and Tailwind CSS for
   - Custom dark theme with mint (#98E5DD) and coral (#EEB58F) accents
   - High contrast for better readability
   - Consistent color scheme
-- **Navigation**:
-  - Transparent modern navbar
-  - Responsive navigation elements
-  - Active state indicators
 
 ### Animations & Interactions
 - Smooth page transitions
@@ -86,37 +85,6 @@ A modern, responsive analytics dashboard built with Next.js and Tailwind CSS for
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 🏗️ Project Structure
-
-```
-/streamify
-|-- /app
-|   |-- /components
-|   |   |-- Card.js
-|   |   |-- Navbar.js
-|   |   |-- UserGrowthChart.js
-|   |   |-- RevenueDistributionChart.js
-|   |   |-- TopSongsChart.js
-|   |   |-- DataTable.js
-|   |   |-- UserEngagement.js
-|   |   |-- GenreDistribution.js
-|   |   |-- PlatformUsage.js
-|   |-- /dashboard
-|   |   |-- page.js
-|   |-- /lib
-|   |   |-- mockData.js
-|   |-- layout.js
-|   |-- page.js
-|   |-- not-found.js
-|   |-- globals.css
-|-- /public
-|   |-- /album-arts
-|-- tailwind.config.js
-|-- next.config.js
-|-- package.json
-|-- README.md
-```
-
 ## 📱 Component Organization
 
 ### Core Components
@@ -138,30 +106,10 @@ A modern, responsive analytics dashboard built with Next.js and Tailwind CSS for
 
 ### Data & Configuration
 - `lib/mockData.js`: Mock data for all components
-- `globals.css`: Global styles
-- `tailwind.config.js`: Theme configuration
 
 ## 📱 Responsive Design
 
 The dashboard is fully responsive across all devices:
-
-- **Mobile** (<640px):
-  - Single column layout
-  - Collapsible navigation
-  - Optimized charts for small screens
-  - Scrollable tables
-
-- **Tablet** (640px - 1024px):
-  - Two-column grid layout
-  - Expanded navigation
-  - Responsive chart sizes
-  - Optimized card layouts
-
-- **Desktop** (>1024px):
-  - Multi-column grid layout
-  - Full navigation with labels
-  - Large interactive charts
-  - Comprehensive data views
 
 ## 🔧 Configuration
 
@@ -190,28 +138,3 @@ colors: {
   }
 }
 ```
-
-### Typography
-- Primary Font: Inter (Google Fonts)
-- Responsive text sizes
-- Optimized line heights and spacing
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Recharts for the beautiful charts
-- Framer Motion for the smooth animations
-- Heroicons for the beautiful icons
