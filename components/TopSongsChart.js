@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo, memo } from 'react';
 import {
   BarChart,
   Bar,
@@ -10,10 +11,9 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { motion } from 'framer-motion';
-import { topSongs } from '@/lib/mockData';
+import { topSongs } from '../lib/mockData';
 
-
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = memo(({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-dashboard-hover p-3 rounded-xl">
@@ -25,9 +25,29 @@ const CustomTooltip = ({ active, payload, label }) => {
     );
   }
   return null;
-};
+});
 
-export default function TopSongsChart() {
+CustomTooltip.displayName = 'CustomTooltip';
+
+const SongCard = memo(({ song, index }) => (
+  <div
+    key={song.name}
+    className="bg-dashboard-hover rounded-lg p-2 text-center"
+  >
+    <p className="text-xs text-white/60 truncate">{song.artist}</p>
+    <p className="text-sm text-white font-medium truncate">{song.name}</p>
+    <p className={`text-xs ${song.trend > 0 ? 'text-accent-mint' : 'text-accent-coral'}`}>
+      {song.trend > 0 ? '+' : ''}{song.trend}%
+    </p>
+  </div>
+));
+
+SongCard.displayName = 'SongCard';
+
+function TopSongsChart() {
+  // Memoize chart data formatting
+  const chartData = useMemo(() => topSongs, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -44,7 +64,7 @@ export default function TopSongsChart() {
       <div className="h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={topSongs}
+            data={chartData}
             margin={{
               top: 5,
               right: 10,
@@ -81,19 +101,12 @@ export default function TopSongsChart() {
         </ResponsiveContainer>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mt-4">
-        {topSongs.map((song, index) => (
-          <div
-            key={song.name}
-            className="bg-dashboard-hover rounded-lg p-2 text-center"
-          >
-            <p className="text-xs text-white/60 truncate">{song.artist}</p>
-            <p className="text-sm text-white font-medium truncate">{song.name}</p>
-            <p className={`text-xs ${song.trend > 0 ? 'text-accent-mint' : 'text-accent-coral'}`}>
-              {song.trend > 0 ? '+' : ''}{song.trend}%
-            </p>
-          </div>
+        {chartData.map((song, index) => (
+          <SongCard key={song.name} song={song} index={index} />
         ))}
       </div>
     </motion.div>
   );
-} 
+}
+
+export default memo(TopSongsChart); 
